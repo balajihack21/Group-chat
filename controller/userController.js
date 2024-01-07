@@ -2,8 +2,6 @@ const path = require("path");
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const sequelize = require("../util/database");
-const Sib = require("sib-api-v3-sdk");
 const { Op } = require("sequelize");
 
 function generateAccessToken(id, email) {

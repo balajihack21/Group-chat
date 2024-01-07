@@ -11,11 +11,18 @@ app.use(express.static('public'))
 
 const sequelize=require('./util/database')
 const userRouter=require('./router/userRouter')
+const resetPasswordRouter=require('./router/resetPasswordRouter')
+const User=require('./model/userModel')
+const ResetPassword = require("./model/resetPasswordModel");
 
 app.use("/", userRouter);
 app.use("/user", userRouter);
 
+app.use("/password", resetPasswordRouter);
 
+
+ResetPassword.belongsTo(User);
+User.hasMany(ResetPassword);
 
 sequelize.sync()
     .then(res=>{
