@@ -2,6 +2,7 @@ const path = require("path");
 const User = require("../model/userModel");
 const Chat = require("../model/chatModel");
 const sequelize = require("../util/database");
+const {Op}=require('sequelize')
 
 exports.sendMessage = async (req, res, next) => {
   try {
@@ -17,27 +18,29 @@ exports.sendMessage = async (req, res, next) => {
   }
 };
 
-exports.getMessages = async (req, res, next) => {
-    try {
-      const messages = await Chat.findAll();
-      return res.status(200).json({ messages: messages });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // exports.getMessages = async (req, res, next) => {
+// exports.getMessages = async (req, res, next) => {
 //     try {
-//         const param = req.params.param;
-//         const messages = await Chat.findAll({
-//           where: {
-//             id: {
-//               [Op.gt]: param,
-//             },
-//           },
-//         });
+//       const messages = await Chat.findAll();
 //       return res.status(200).json({ messages: messages });
 //     } catch (error) {
 //       console.log(error);
 //     }
 //   };
+
+  exports.getMessages = async (req, res, next) => {
+    try {
+        const param = req.params.param;
+        
+        const messages = await Chat.findAll({
+          where: {
+            id: {
+              [Op.gt]: Number(param),
+            },
+          },
+        });
+        console.log(messages)
+      return res.status(200).json({ messages: messages });
+    } catch (error) {
+      console.log(error);
+    }
+  };
