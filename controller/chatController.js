@@ -25,3 +25,19 @@ exports.getMessages = async (req, res, next) => {
       console.log(error);
     }
   };
+
+  // exports.getMessages = async (req, res, next) => {
+//     try {
+//         const param = req.params.param;
+//         const messages = await Chat.findAll({
+//           where: {
+//             id: {
+//               [Op.gt]: param,
+//             },
+//           },
+//         });
+//       return res.status(200).json({ messages: messages });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
