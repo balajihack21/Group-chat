@@ -1,21 +1,26 @@
 const path = require("path");
 const User = require("../model/userModel");
 const Chat = require("../model/chatModel");
+const Group = require("../model/groupModel");
 const sequelize = require("../util/database");
-const {Op}=require('sequelize')
+const { Op } = require('sequelize')
 
 exports.sendMessage = async (req, res, next) => {
-  try {
-    await Chat.create({
-      name: req.user.name,
-      message: req.body.message,
-      userId: req.user.id,
-    });
-    return res.status(200).json({ message: "Success!" });
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({ message: "Error" });
-  }
+    try {
+        const group = await Group.findOne({
+            where: { name: req.body.groupName },
+        });
+        await Chat.create({
+            name: req.user.name,
+            message: req.body.message,
+            userId: req.user.id,
+            // groupId: group.dataValues.id
+        });
+        return res.status(200).json({ message: "Success!" });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ message: "Error" });
+    }
 };
 
 // exports.getMessages = async (req, res, next) => {
@@ -27,20 +32,27 @@ exports.sendMessage = async (req, res, next) => {
 //     }
 //   };
 
-  exports.getMessages = async (req, res, next) => {
+exports.getMessages = async (req, res, next) => {
     try {
-        const param = req.params.param;
-        
+        const param = req.query.param;
+        console.log(req.query.groupName);
+        const group = await Group.findOne({
+            where: { name: req.query.groupName },
+        });
+        console.log(group.dataValues)
         const messages = await Chat.findAll({
-          where: {
-            id: {
-              [Op.gt]: Number(param),
-            },
-          },
+            where: {
+                [Op.and]: {
+                    id: {
+                        [Op.gt]: param,
+                    },
+                    groupId: group.dataValues.id,
+                }
+            }
         });
         console.log(messages)
-      return res.status(200).json({ messages: messages });
+        return res.status(200).json({ messages: messages });
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  };
+};
