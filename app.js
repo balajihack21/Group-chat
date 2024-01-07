@@ -12,6 +12,7 @@ app.use(express.static('public'))
 const sequelize=require('./util/database')
 const userRouter=require('./router/userRouter')
 const resetPasswordRouter=require('./router/resetPasswordRouter')
+const homePageRouter=require('./router/homePageRouter')
 const User=require('./model/userModel')
 const ResetPassword = require("./model/resetPasswordModel");
 
@@ -19,6 +20,8 @@ app.use("/", userRouter);
 app.use("/user", userRouter);
 
 app.use("/password", resetPasswordRouter);
+
+app.use("/homePage", homePageRouter);
 
 
 ResetPassword.belongsTo(User);
