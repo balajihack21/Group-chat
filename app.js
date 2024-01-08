@@ -36,11 +36,12 @@ ResetPassword.belongsTo(User);
 User.hasMany(Chat, { onDelete: "CASCADE", hooks: true });
 Chat.belongsTo(User)
 
+Group.hasMany(Chat);
 Chat.belongsTo(Group);
 
 User.hasMany(UserGroup);
 
-Group.hasMany(Chat);
+
 Group.hasMany(UserGroup);
 
 UserGroup.belongsTo(User);

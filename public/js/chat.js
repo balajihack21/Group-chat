@@ -27,8 +27,16 @@ async function activeGroup(e) {
   }, 5000);
 }
 
+
+
 async function messageSend() {
   try {
+    if (chatBoxBody.querySelector(".groupMembersDiv")) {
+      const members = chatBoxBody.querySelectorAll(".groupMembersDiv");
+      members.forEach((member) => {
+        member.remove();
+      });
+    }
     const message = messageTextArea.value;
     const token = localStorage.getItem("token");
     const groupName = localStorage.getItem("groupName");
@@ -232,7 +240,7 @@ function decodeToken(token) {
       }
   
   messageSendBtn.addEventListener("click", messageSend);
-  document.addEventListener("DOMContentLoaded", getMessages);
+//   document.addEventListener("DOMContentLoaded", getMessages);
 //   document.addEventListener("DOMContentLoaded", getMessagesFromLocalStorage);
 uiGroup.addEventListener("click", activeGroup);
 document.addEventListener("DOMContentLoaded", () => {

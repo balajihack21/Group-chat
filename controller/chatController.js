@@ -10,11 +10,12 @@ exports.sendMessage = async (req, res, next) => {
         const group = await Group.findOne({
             where: { name: req.body.groupName },
         });
+        console.log("gggggg" +group.dataValues.id)
         await Chat.create({
             name: req.user.name,
             message: req.body.message,
             userId: req.user.id,
-            // groupId: group.dataValues.id
+            groupId: group.dataValues.id
         });
         return res.status(200).json({ message: "Success!" });
     } catch (error) {
@@ -44,7 +45,7 @@ exports.getMessages = async (req, res, next) => {
             where: {
                 [Op.and]: {
                     id: {
-                        [Op.gt]: param,
+                        [Op.gt]: Number(param),
                     },
                     groupId: group.dataValues.id,
                 }
