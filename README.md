@@ -18,8 +18,11 @@ This is a group chat application built with Express, Node.js, and MySQL.
 - Persistent message storage in a MySQL database
 
 ## Requirements
-- Node.js (>= version 12)
-- MySQL (>= version 5.7)
+- HTML
+- Css
+- Node.js
+- Express js
+- MySQL 
 
 ## Installation
 1. Clone the repository:
