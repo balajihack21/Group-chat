@@ -20,6 +20,7 @@ This is a group chat application built with Express, Node.js, and MySQL.
 ## Requirements
 - HTML
 - Css
+- JWT authentication
 - Node.js
 - Express js
 - MySQL 
