@@ -36,7 +36,7 @@ npm install
 ## Configuration
 Create a .env file in the root directory.
 Add the following configurations to the .env file:
-PORT=3000
+PORT=4000
 DB_HOST=localhost
 DB_USER=your_database_user
 DB_PASSWORD=your_database_password
