@@ -20,6 +20,7 @@ const ResetPassword = require("./model/resetPasswordModel");
 const Chat=require('./model/chatModel')
 const Group = require("./model/groupModel");
 const UserGroup = require("./model/userGroup");
+// const check=require('./jobs/aws')
 
 app.use("/", userRouter);
 app.use("/user", userRouter);
@@ -40,24 +41,25 @@ Group.hasMany(Chat);
 Chat.belongsTo(Group);
 
 User.hasMany(UserGroup);
+UserGroup.belongsTo(User);
 
 
 Group.hasMany(UserGroup);
-
-UserGroup.belongsTo(User);
 UserGroup.belongsTo(Group);
 
 
+const job = require("./jobs/cron");
+job.start();
 
-
-sequelize.sync()
-    .then(res=>{
-      app.listen(process.env.PORT)
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-
+sequelize
+// .sync({force:true})
+  .sync()
+  .then((result) => {
+    app.listen(process.env.PORT);
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
 
 
 

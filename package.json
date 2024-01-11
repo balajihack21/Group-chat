@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.489.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "cron": "^3.1.6",
     "dotenv": "^16.3.1",
     "epress": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
