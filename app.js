@@ -4,6 +4,8 @@ const bodyparser=require('body-parser')
 const cors=require('cors')
 const dotenv=require('dotenv')
 dotenv.config()
+const fileUpload = require('express-fileupload');
+app.use(fileUpload());
 
 app.use(cors())
 app.use(bodyparser.json())

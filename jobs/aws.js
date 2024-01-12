@@ -11,13 +11,12 @@ const s3Client = new S3Client({
 });
 
 
-exports.uploadToS3 = async (image, filename) => {
+exports.uploadToS3 = async (file) => {
     try {
         const uploadParams = {
             Bucket: bucketName,
-            Key: filename,
-            Body: image,
-            ACL: "public-read",
+            Key: file.name,
+            Body: file.data,
             ContentType: "image/jpeg",
           };
           const data = await s3Client.send(new PutObjectCommand(uploadParams));

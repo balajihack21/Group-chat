@@ -13,6 +13,10 @@ const Chat = sequelize.define("chats", {
   },
   message: {
     type: Sequelize.STRING,
+  },
+  isImage:{
+    type:Sequelize.BOOLEAN,
+    defaultValue:false
   }
 });
 

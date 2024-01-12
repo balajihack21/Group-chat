@@ -3,6 +3,7 @@ const User = require("../model/userModel");
 const Chat = require("../model/chatModel");
 const Group = require("../model/groupModel");
 const sequelize = require("../util/database");
+const awsS3=require('../jobs/aws')
 const { Op } = require('sequelize')
 
 
@@ -34,7 +35,6 @@ exports.sendMessage = async (req, res, next) => {
         const group = await Group.findOne({
             where: { name: req.body.groupName },
         });
-        console.log("gggggg" +group.dataValues.id)
         await Chat.create({
             name: req.user.name,
             message: req.body.message,
@@ -81,3 +81,28 @@ exports.sendMessage = async (req, res, next) => {
 //         console.log(error);
 //     }
 // };
+
+
+exports.uploadFile=async(req,res,next)=>{
+  try{
+      const file = req.files.file
+      console.log(file)
+      const fileName = file.name;
+      const fileURL= await awsS3.uploadToS3(file)
+      const group = await Group.findOne({
+        where: { name: req.body.groupName },
+    });
+    console.log("gggggg" +group.dataValues.id)
+    await Chat.create({
+        name: req.user.name,
+        message: fileURL,
+        userId: req.user.id,
+        isImage:true,
+        groupId: group.dataValues.id
+    });
+      res.status(200).json({message:"file uploaded",success:true})
+  }catch(err){
+      console.log(err);
+      res.status(500).json({message:"Something went Wrong",err:err,success:false})
+  }
+}
