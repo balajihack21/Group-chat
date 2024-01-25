@@ -21,7 +21,7 @@ io.on("connection", (socket) => {
       try {
         const group = await Group.findOne({ where: { name: groupName } });
         const messages = await Chat.findAll({
-          where: { groupId: group.dataValues.id },
+          where: { GroupId: group.dataValues.id },
         });
         console.log("Request Made");
         io.emit("messages", messages);
@@ -38,8 +38,8 @@ exports.sendMessage = async (req, res, next) => {
         await Chat.create({
             name: req.user.name,
             message: req.body.message,
-            userId: req.user.id,
-            groupId: group.dataValues.id
+            UserId: req.user.id,
+            GroupId: group.dataValues.id
         });
         return res.status(200).json({ message: "Success!" });
     } catch (error) {
@@ -96,9 +96,9 @@ exports.uploadFile=async(req,res,next)=>{
     await Chat.create({
         name: req.user.name,
         message: fileURL,
-        userId: req.user.id,
+        UserId: req.user.id,
         isImage:true,
-        groupId: group.dataValues.id
+        GroupId: group.dataValues.id
     });
       res.status(200).json({message:"file uploaded",success:true})
   }catch(err){

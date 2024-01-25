@@ -1,7 +1,7 @@
 const sequelize = require("../util/database");
 const Sequelize = require("sequelize");
 
-const Chat = sequelize.define("chats", {
+const Chat = sequelize.define("Chat", {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,

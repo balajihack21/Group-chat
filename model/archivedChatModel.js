@@ -1,7 +1,7 @@
 const sequelize = require("../util/database");
 const Sequelize = require("sequelize");
 
-const ArchivedChat = sequelize.define("archivedChats", {
+const ArchivedChat = sequelize.define("ArchivedChat", {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,

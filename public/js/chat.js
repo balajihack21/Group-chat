@@ -43,7 +43,7 @@ async function messageSend() {
       return alert("Select group to send the message");
     }
     const res = await axios.post(
-      `http://localhost:4000/chat/sendMessage/`,
+      `http://localhost:4000/chat/send-message/`,
       {
         message: message,
         groupName: groupName,
@@ -85,7 +85,7 @@ async function getMessages() {
     messages.forEach((message) => {
       
       
-      if (message.userId == userId) {
+      if (message.UserId == userId) {
         console.log(message)
         if(message.isImage==true){
           
@@ -233,7 +233,7 @@ uploadbtn.addEventListener('click',uploadFile);
                 formData.append('groupName',groupName)
             console.log(formData);
             
-            const response=await axios.post(`http://localhost:4000/chat/sendfile`,formData,
+            const response=await axios.post(`http://localhost:4000/chat/send-file`,formData,
             {
                 headers: {
                   Authorization: token , 

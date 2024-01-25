@@ -38,7 +38,7 @@ exports.sendMail = async (req, res, next) => {
     const resetRequest = await ResetPassword.create({
       id: requestId,
       isActive: true,
-      userId: recepientEmail.dataValues.id,
+      UserId: recepientEmail.dataValues.id,
     });
 
     const client = Sib.ApiClient.instance;
@@ -60,7 +60,7 @@ exports.sendMail = async (req, res, next) => {
       subject: "Group Chat App Reset Password",
       textContent: "Link Below",
       htmlContent: `<h3>Hi! We got the request from you for reset the password. Here is the link below >>></h3>
-      <a href="http://localhost:4000/password/resetPasswordPage/{{params.requestId}}"> Click Here</a>`,
+      <a href="http://localhost:4000/password/reset/{{params.requestId}}"> Click Here</a>`,
       params: {
         requestId: requestId,
       },
@@ -95,7 +95,7 @@ exports.updatePassword = async (req, res, next) => {
       where: { id: requestId[requestId.length - 1], isActive: true },
     });
     if (checkResetRequest[0]) {
-      const userId = checkResetRequest[0].dataValues.userId;
+      const userId = checkResetRequest[0].dataValues.UserId;
       const result = await ResetPassword.update(
         { isActive: false },
         { where: { id: requestId } }

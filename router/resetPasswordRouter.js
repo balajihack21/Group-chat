@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const resetPasswordController = require("../controller/resetPasswordController");
 
-router.get("/forgotPasswordPage", resetPasswordController.forgotPasswordPage);
-router.post("/sendMail", resetPasswordController.sendMail);
+router.get("/forgotpassword", resetPasswordController.forgotPasswordPage);
+router.post("/send-mail", resetPasswordController.sendMail);
 router.get(
-  "/resetPasswordPage/:requestId",
+  "/reset/:requestId",
   resetPasswordController.resetPasswordPage
 );
-router.post("/resetPassword", resetPasswordController.updatePassword);
+router.post("/password-reset", resetPasswordController.updatePassword);
 
 module.exports = router;

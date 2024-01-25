@@ -25,8 +25,8 @@ exports.createGroup = async (req, res, next) => {
         invitedMembers.map(async (user) => {
           const response = await UserGroup.create({
             isadmin: false,
-            userId: user.dataValues.id,
-            groupId: group.dataValues.id,
+            UserId: user.dataValues.id,
+            GroupId: group.dataValues.id,
           });
         })
       );
@@ -36,8 +36,8 @@ exports.createGroup = async (req, res, next) => {
       //   );
       await UserGroup.create({
         isadmin: true,
-        userId: req.user.id,
-        groupId: group.dataValues.id,
+        UserId: req.user.id,
+        GroupId: group.dataValues.id,
       });
     })();
 
@@ -59,7 +59,7 @@ exports.addToGroup = async (req, res, next) => {
           [Op.and]: [{ isadmin: 1 }, { groupId: group.id }],
         },
       });
-      if (admin.userId == req.user.id) {
+      if (admin.UserId == req.user.id) {
         const invitedMembers = await User.findAll({
           where: {
             email: {
@@ -72,8 +72,8 @@ exports.addToGroup = async (req, res, next) => {
           invitedMembers.map(async (user) => {
             const response = await UserGroup.create({
               isadmin: false,
-              userId: user.dataValues.id,
-              groupId: group.dataValues.id,
+              UserId: user.dataValues.id,
+              GroupId: group.dataValues.id,
             });
           })
         );
@@ -96,7 +96,7 @@ exports.getGroups = async (req, res, next) => {
       include: [
         {
           model: UserGroup,
-          where: { userId: req.user.id },
+          where: { UserId: req.user.id },
         },
       ],
     });
@@ -118,7 +118,7 @@ exports.deleteFromGroup = async (req, res, next) => {
             [Op.and]: [{ isadmin: 1 }, { groupId: group.id }],
           },
         });
-        if (admin.userId == req.user.id) {
+        if (admin.UserId == req.user.id) {
           const invitedMembers = await User.findAll({
             where: {
               email: {
@@ -134,8 +134,8 @@ exports.deleteFromGroup = async (req, res, next) => {
                   [Op.and]: [
                     {
                       isadmin: false,
-                      userId: user.dataValues.id,
-                      groupId: group.dataValues.id,
+                      UserId: user.dataValues.id,
+                      GroupId: group.dataValues.id,
                     },
                   ],
                 },
