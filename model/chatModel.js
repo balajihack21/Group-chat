@@ -12,7 +12,7 @@ const Chat = sequelize.define("Chat", {
     type: Sequelize.STRING,
   },
   message: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT(),
   },
   isImage:{
     type:Sequelize.BOOLEAN,

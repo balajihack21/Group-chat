@@ -29,7 +29,7 @@ app.use("/user", userRouter);
 
 app.use("/password", resetPasswordRouter);
 
-app.use("/homePage", homePageRouter);
+app.use("/home", homePageRouter);
 app.use("/chat",chatRouter)
 app.use("/group", groupRouter);
 

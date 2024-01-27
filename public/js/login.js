@@ -29,7 +29,7 @@ function login() {
     .then((result) => {
       alert(result.data.message);
       localStorage.setItem("token", result.data.token);
-      window.location.href = "/homePage";
+      window.location.href = "/home";
     })
     .catch((error) => {
       if (error.response) {
