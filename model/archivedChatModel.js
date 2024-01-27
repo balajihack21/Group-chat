@@ -12,7 +12,7 @@ const ArchivedChat = sequelize.define("ArchivedChat", {
     type: Sequelize.STRING,
   },
   message: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT(),
   },
 });
 
